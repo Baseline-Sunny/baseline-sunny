@@ -1,5 +1,47 @@
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>baseline sunny</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 480px; margin: 2rem auto; padding: 0 1rem; }
+    form { display: grid; gap: 0.75rem; }
+    label { display: grid; gap: 0.25rem; font-size: 0.9rem; }
+    input, textarea { font: inherit; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+    textarea { min-height: 8rem; resize: vertical; }
+    button { padding: 0.6rem 1rem; font: inherit; cursor: pointer; }
+  </style>
+</head>
 <body>
-this is the home of baseline sunny.
+  <h1>baseline sunny</h1>
+  <p>Get in touch:</p>
+  <form id="contact-form">
+    <label>
+      Name
+      <input type="text" name="name" required>
+    </label>
+    <label>
+      Email
+      <input type="email" name="email" required>
+    </label>
+    <label>
+      Message
+      <textarea name="message" required></textarea>
+    </label>
+    <button type="submit">Send</button>
+  </form>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const name = data.get('name');
+      const email = data.get('email');
+      const message = data.get('message');
+      const subject = encodeURIComponent(`Contact from ${name}`);
+      const body = encodeURIComponent(`From: ${name} <${email}>\n\n${message}`);
+      window.location.href = `mailto:brandonkylenewman@gmail.com?subject=${subject}&body=${body}`;
+    });
+  </script>
 </body>
 </html>
